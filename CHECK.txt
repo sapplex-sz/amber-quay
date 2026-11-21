@@ -1,0 +1,22 @@
+AMBER QUAY: self-check notes
+
+Verified
+- `MAKEFUN_OUTPUT_DIR=out node main.ts` run twice (out, out2): `diff -r` reports the trees byte-identical, dossier.json included.
+- screenshots/: 4 files (1-title.jpg, 2-downtown.jpg, 3-chase.jpg, 4-mission.jpg), JPEG, 1280x720, 118-230 KiB each, names use only letters, digits, . _ -
+  They are real headless-Chrome captures of ?shot=title|downtown|chase|mission&seed=1 (recorded in shots.json). Two independent captures of the same
+  URL differ only by rasteriser dithering (max 18 levels on ~0.1% of pixels).
+- vendor/makefun-game.ts unchanged (sha256 matches the value taken at the start of the session).
+- game/: 14 entries (10 modules + index.html), ~244 KB, index.html 825 bytes, no symlinks.
+- No http(s) URLs, CDN, web fonts, node: imports or bare specifiers anywhere under game/; every import is a relative ./ path.
+- README.md carries the three make.fun badges as markdown images plus the `node serve.ts` / http://localhost:8080 instructions. LICENSE stays MIT.
+- Headless simulation (Node, no DOM): 60-120 s runs through all three jobs, carjacking, heat 3-5 pursuit, combat and respawn: no exceptions or NaNs.
+- Real Chrome driven over DevTools: title -> New Game -> walking and sprinting -> enter a car -> drive -> exit -> mouse fire (ammo and heat respond) -> pause.
+  No console errors. Draw time measured at roughly 1.4-14 ms per frame in GPU-less headless Chrome.
+
+Known limitations
+- Not tested on touch devices or with gamepads; desktop keyboard and mouse only.
+- Traffic has no lane changes or overtaking; cars queue behind blockers and "ghost through" after a long stall.
+- Police pathing follows the grid road graph and switches to direct pursuit with line of sight, so cruisers can occasionally jam against props.
+- Tall buildings go see-through when they would hide the player or car; other entities behind tall buildings can still be hidden.
+- Audio starts after the first key press or click (browser autoplay rules). All sound is synthesised; there is no sound file.
+- Fonts fall back to system condensed sans-serif faces if Oswald / Barlow are not installed; layout still holds.

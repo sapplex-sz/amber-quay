@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AMBER QUAY · a Rookspire crime story</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #140c1c; }
+  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
+  #status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+</style>
+</head>
+<body>
+<canvas id="game" aria-label="AMBER QUAY: an open-world crime game in the river-port city of Rookspire. WASD to move, F to enter vehicles, mouse to aim and shoot."></canvas>
+<p id="status" role="status" aria-live="polite">AMBER QUAY</p>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
